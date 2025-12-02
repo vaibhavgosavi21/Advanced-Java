@@ -1,0 +1,29 @@
+package Mapping1.OneToMany;
+
+ 
+
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Entity
+@Table(name = "teams")
+@Data
+@AllArgsConstructor
+public class TeamDTO {
+
+	@Id
+	private int tid;
+	private String tname;
+	private String location;
+	private String teamOwner;
+	
+	@OneToMany
+	private List<PlayerDTO> players;
+
+}

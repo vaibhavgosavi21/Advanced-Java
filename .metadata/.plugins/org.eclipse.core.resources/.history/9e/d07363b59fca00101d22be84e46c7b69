@@ -1,0 +1,5 @@
+package Mapping1.OneToMany;
+
+public class TeamDTO {
+
+}

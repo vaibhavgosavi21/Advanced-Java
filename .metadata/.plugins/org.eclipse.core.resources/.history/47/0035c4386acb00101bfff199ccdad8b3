@@ -1,0 +1,17 @@
+package Mapping1.ManyToMany;
+
+import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Entity
+@Data
+@AllArgsConstructor
+public class ProductDTO {
+
+	private int pid;
+	private String pname;
+	private double price;
+	private String cname;
+	private int quantity;
+}

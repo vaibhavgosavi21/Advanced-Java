@@ -1,0 +1,59 @@
+package Mapping1.ManyToMany;
+
+import java.util.Arrays;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
+
+public class CustomerProductDAO {
+	
+	private static EntityManagerFactory factory;
+	private static EntityManager manager;
+	private static EntityTransaction transaction;
+
+	public static void openconnection() {
+		factory = Persistence.createEntityManagerFactory("HibernateMapping1");
+		manager = factory.createEntityManager();
+		transaction = manager.getTransaction();
+	}
+
+	public static void closeconnection() {
+		if(factory!=null) {
+			factory.close();
+		}
+		if(manager!=null) {
+			manager.close();
+		}
+		if(transaction.isActive()) {
+			transaction.rollback();
+		}
+	}
+	
+	public static void main(String[] args) {
+		openconnection();
+		transaction.begin();
+		
+		ProductDTO product1= new ProductDTO(1, "Watch", 5000,"Titans", 10);
+		ProductDTO product2= new ProductDTO(2, "laptop", 50000,"lenovo", 20);
+		ProductDTO product3= new ProductDTO(3, "mobile", 25000,"samsung", 30);
+		ProductDTO product4= new ProductDTO(4, "shoes", 1200,"redtape", 40);
+		
+		manager.persist(product1);
+		manager.persist(product2);
+		manager.persist(product3);
+		manager.persist(product4);
+		
+		CustomerDTO customer1=new CustomerDTO(1,"Purva",76634596l,"pune",Arrays.asList(product1,product2,product3));
+		CustomerDTO customer2=new CustomerDTO(2,"Rahul",76634596l,"pune",Arrays.asList(product1,product2,product3));
+
+		manager.persist(customer1);
+		manager.persist(customer2);
+		
+		transaction.commit();
+		closeconnection();
+
+	}
+
+}

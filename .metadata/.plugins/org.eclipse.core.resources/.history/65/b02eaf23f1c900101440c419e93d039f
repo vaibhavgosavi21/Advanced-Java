@@ -1,0 +1,78 @@
+package hibernate2;
+
+import java.util.Scanner;
+
+import com.mysql.cj.x.protobuf.MysqlxConnection.Close;
+import com.mysql.cj.x.protobuf.MysqlxCursor.Open;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
+
+public class StudentDAO {
+
+	private static EntityManagerFactory factory;
+	private static EntityManager manager;
+	private static EntityTransaction transaction;
+
+	public static void OpenConnection() {
+		factory = Persistence.createEntityManagerFactory("hibernate2");
+		manager = factory.createEntityManager();
+		transaction = manager.getTransaction();
+	}
+
+	public static void CloseConnection() {
+		if (factory != null) {
+			factory.close();
+		}
+		if (manager != null) {
+			manager.close();
+		}
+		if (transaction.isActive()) {
+			transaction.rollback();
+		}
+	}
+
+	public static void main(String[] args) {
+
+		OpenConnection();
+		transaction.begin();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("--------- Hibernate CRUD operation ---------");
+		System.out.println("\n1. Add new Student details");
+		System.out.println("2. Update  Student details");
+		System.out.println("3. Delete  Student details");
+		System.out.println("4. Show  Student details");
+		System.out.println("Enter your choice");
+		int ch = sc.nextInt();
+		switch (ch) {
+		case 1 -> {
+			
+			System.out.println("--------- Add New Student Details ---------");
+			System.out.println("Enter student roll no: ");
+			int rollno = sc.nextInt();
+			System.out.println("Enter Student name: ");
+			String name = sc.next();
+			System.out.println("Enter Student marks: ");
+			double marks = sc.nextDouble();
+			StudentDTO std=new StudentDTO();
+			std.setRollno(rollno);
+			std.setSname(name);
+			std.setSname(name);		
+			
+			manager.persist(std);
+			System.out.println("Student details updated successfully");
+
+			transaction.commit();
+			CloseConnection();
+
+		}
+		case 2->{
+			
+		}
+
+		}
+	}
+
+}

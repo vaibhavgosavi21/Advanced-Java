@@ -1,0 +1,27 @@
+package Mapping1.OneToMany;
+
+import java.util.ArrayList;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Entity
+@Table(name = "teams")
+@Data
+@AllArgsConstructor
+public class TeamDTO {
+
+	public TeamDTO(int tid2, String name, String loc, String owner, ArrayList<PlayerDTO> players) {
+		// TODO Auto-generated constructor stub
+	}
+	@Id
+	private int tid;
+	private String tname;
+	private String location;
+	private String teamOwner;
+
+}

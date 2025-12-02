@@ -1,0 +1,5 @@
+package Mapping1.ManyToMany;
+
+public class ProductDTO {
+
+}

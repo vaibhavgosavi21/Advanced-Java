@@ -1,0 +1,26 @@
+package Mapping.annotation;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Data     //lobok annotation
+@Entity		//hibernate annotation
+@Table(name="emp")
+public class EmployeeDTO {
+
+	@Id
+	@Column(name="empid" )
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private int id;
+	@Column(name="empname", nullable=false, unique=true)
+	private String name;
+	@Column(unique=false)
+	private double salary;
+	private String designation;
+	private String loc;
+}

@@ -1,5 +1,0 @@
-package Mapping.annotation;
-
-public class EmployeeDTO {
-
-}
